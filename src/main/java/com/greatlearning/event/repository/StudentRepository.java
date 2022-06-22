@@ -30,7 +30,8 @@ public class StudentRepository {
 
     public List<Student> getRegisteredStudents(){
         Session session = sessionFactory.getCurrentSession();
-        return session.createQuery("from students").list();
+        List<Student> listStudents = session.createQuery("from Student",Student.class).getResultList();
+        return listStudents;
     }
     public Student updateStudentDetails(int id,Student updatedStudent){
         Session session = sessionFactory.getCurrentSession();
