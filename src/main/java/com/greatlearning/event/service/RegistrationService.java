@@ -2,12 +2,15 @@ package com.greatlearning.event.service;
 
 import com.greatlearning.event.model.Student;
 import com.greatlearning.event.repository.StudentRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
 @Service
+
 public class RegistrationService {
+    @Autowired
     private final StudentRepository studentRepository;
     public RegistrationService(StudentRepository studentRepository){
         this.studentRepository = studentRepository;

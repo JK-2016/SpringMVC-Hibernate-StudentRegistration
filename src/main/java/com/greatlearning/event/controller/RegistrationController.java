@@ -1,30 +1,54 @@
 package com.greatlearning.event.controller;
 
+import com.greatlearning.event.model.Emp;
 import com.greatlearning.event.model.Student;
 import com.greatlearning.event.service.RegistrationService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.ModelAndView;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Controller
+@Component
 public class RegistrationController {
+    @Autowired
     private RegistrationService registrationService;
     public RegistrationController(RegistrationService registratonService){
         this.registrationService = registratonService;
     }
-    @RequestMapping(value="/registration", method = RequestMethod.GET)
-    public String showStudentForm(Model theModel){
-        Student theStudent = new Student();
-       theModel.addAttribute("student",theStudent);
-        return "student-form";
-//        theModel.addAttribute("message",
-//                "Hello World and Welcome to Spring MVC!");
-        //return "student-form";
-       //return "Student";
+
+    /****************/
+    @RequestMapping("/showStudentform")
+    public ModelAndView showStudentForm(){
+        return new ModelAndView("student-form","command",new Student());
     }
+    @RequestMapping(value="/registerStudent",method = RequestMethod.POST)
+    public ModelAndView registerStudent(@ModelAttribute("student") Student theStudent){
+        //write code to save emp object
+        System.out.println(theStudent.getId()+" "+theStudent.getName()+
+                " "+theStudent.getDepartment()+" " +theStudent.getCountry());
+        registrationService.registerStudent(theStudent);
+        //return new ModelAndView("empform","command",emp);
+        return new ModelAndView("redirect:/list");
+    }
+    /*************************************/
+
+//    @RequestMapping(value="/registration", method = RequestMethod.GET)
+//    public String showStudentForm(Model theModel){
+//        Student theStudent = new Student();
+//       theModel.addAttribute("student",theStudent);
+//        return "student-form";
+////        theModel.addAttribute("message",
+////                "Hello World and Welcome to Spring MVC!");
+//        //return "student-form";
+//       //return "Student";
+//    }
     @GetMapping("/list")
     public String getAllRegisteredStudents(Model theModel){
         List<Student> theStudents = registrationService.getRegisteredStudents();
@@ -41,19 +65,43 @@ public class RegistrationController {
     public String updateStudent(@RequestParam("studentId") int theId, Model theModel) {
         Student theStudent = registrationService.getStudent(theId);
         theModel.addAttribute("student",theStudent);
-        return("redirect:/list");
-    }
-
-    @PostMapping("/registerStudent")
-    @ResponseStatus(HttpStatus.CREATED)
-    public String registerStudent(@ModelAttribute("student") Student thestudent){
-        registrationService.registerStudent(thestudent);
         return "student-form";
     }
 
 
+//    @RequestMapping(value = "/registerStudent", method = RequestMethod.POST)
+//    /*@ResponseStatus(HttpStatus.CREATED)*/
+//    public String registerStudent(@ModelAttribute("student") Student thestudent){
+//        registrationService.registerStudent(thestudent);
+//        return("redirect:/list");
+//    }
 
+/*****************Emp Methods*****************/
 
+    @RequestMapping("/empform")
+    public ModelAndView showform(){
+        return new ModelAndView("empform","command",new Emp());
+    }
+    @RequestMapping(value="/save",method = RequestMethod.POST)
+    public ModelAndView save(@ModelAttribute("emp") Emp emp){
+        //write code to save emp object
+        System.out.println(emp.getName()+" "+emp.getSalary()+" "+emp.getDesignation());
+
+        //return new ModelAndView("empform","command",emp);
+        return new ModelAndView("redirect:/viewemp");
+    }
+
+    @RequestMapping("/viewemp")
+    public ModelAndView viewemp(){
+        //write the code to get all employees from DAO
+        //writing manual code for easy understanding
+        List<Emp> list=new ArrayList<Emp>();
+        list.add(new Emp(1,"rahul",35000f,"S.Engineer"));
+        list.add(new Emp(2,"aditya",25000f,"IT Manager"));
+        list.add(new Emp(3,"sachin",55000f,"Care Taker"));
+
+        return new ModelAndView("viewemp","list",list);
+    }
 
 
 }
