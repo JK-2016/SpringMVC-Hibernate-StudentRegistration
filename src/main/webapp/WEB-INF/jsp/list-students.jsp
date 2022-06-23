@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1"%>
-
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE html>
 <html>
 <head><%@ page isELIgnored="false" %>
@@ -46,10 +46,10 @@
        </c:url>
 
        <tr>
-        <td>${tempCustomer.id}</td>
-        <td>${tempCustomer.name}</td>
-        <td>${tempCustomer.department}</td>
-		<td>${tempCustomer.country}</td>
+        <td>${tempStudent.id}</td>
+        <td>${tempStudent.name}</td>
+        <td>${tempStudent.department}</td>
+		<td>${tempStudent.country}</td>
 
         <td>
          <!-- display the update link --> <a href="${updateLink}">Update</a>
