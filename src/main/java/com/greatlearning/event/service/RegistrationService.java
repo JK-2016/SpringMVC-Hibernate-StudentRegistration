@@ -28,6 +28,7 @@ public class RegistrationService {
     public void deleteStudent(int id){
         System.out.println("Student with the following Id is deleted: "+ id);
         this.studentRepository.deleteStudentbyId(id);
+        return;
     }
 
     public Student getStudent(int id) {

@@ -55,17 +55,29 @@ public class RegistrationController {
         theModel.addAttribute("students",theStudents);
         return "list-students";
     }
-    @DeleteMapping("/delete")
+    @RequestMapping(value="/delete")
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public String deleteStudentById(@RequestParam("studentId") int theId){
         registrationService.deleteStudent(theId);
-        return("redirect:/list");
+        return ("redirect:/list");
     }
-    @PutMapping("/updateForm")
+
+//    @RequestMapping(value="/updateForm")
+//    public String updateStudent(@PathVariable int id, Model m){
+//        Emp emp=dao.getEmpById(id);
+//        m.addAttribute("command",emp);
+//        return "empeditform";
+//    }
+    @RequestMapping(value="/updateForm")
     public String updateStudent(@RequestParam("studentId") int theId, Model theModel) {
         Student theStudent = registrationService.getStudent(theId);
-        theModel.addAttribute("student",theStudent);
-        return "student-form";
+        theModel.addAttribute("command",theStudent);
+        return "edit-student-form";
+    }
+    @RequestMapping(value="/update",method = RequestMethod.POST)
+    public String editsave(@ModelAttribute("student") Student student){
+        registrationService.updateStudentDetails(student.getId(),student);
+        return ("redirect:/list");
     }
 
 

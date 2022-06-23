@@ -5,9 +5,9 @@
    </head>
 
    <body>
-      <h2>Student Registration</h2>
+      <h2>Student Details Update</h2>
 
-      <form:form method = "POST" action = "registerStudent" >
+      <form:form method = "POST" action = "update" >
          <table>
             <tr>
                 <td><form:label path = "id">Id</form:label></td>
@@ -28,7 +28,7 @@
 
             <tr>
                <td colspan = "2">
-                  <input type = "submit" value = "Submit"/>
+                  <input type = "submit" value = "Update"/>
                </td>
             </tr>
          </table>

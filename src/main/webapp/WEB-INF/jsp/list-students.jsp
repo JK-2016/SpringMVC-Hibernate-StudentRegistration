@@ -16,7 +16,7 @@
    <hr />
 
    <input type="button" value="Register Student"
-    onclick="window.location.href='showStudentform"'; return false;"
+    onclick="window.location.href='showStudentform';"
     class="btn btn-primary" />
     <br/><br/>
    <div class="panel panel-info">
@@ -36,7 +36,7 @@
       <c:forEach var="tempStudent" items="${students}">
 
        <!-- construct an "update" link with customer id -->
-       <c:url var="updateLink" value="/updateform">
+       <c:url var="updateLink" value="/updateForm">
         <c:param name="studentId" value="${tempStudent.id}" />
        </c:url>
 
@@ -52,7 +52,8 @@
 		<td>${tempStudent.country}</td>
 
         <td>
-         <!-- display the update link --> <a href="${updateLink}">Update</a>
+         <!-- display the update link -->
+          <a href="${updateLink}">Update</a>
          | <a href="${deleteLink}"
          onclick="if (!(confirm('Are you sure you want to delete this customer?'))) return false">Delete</a>
         </td>

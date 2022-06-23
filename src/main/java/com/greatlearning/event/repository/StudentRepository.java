@@ -55,6 +55,7 @@ public class StudentRepository {
         Session session = sessionFactory.getCurrentSession();
         session.delete(session.get(Student.class,id));
         //students.removeIf(student -> student.getId()==id);
+        return;
     }
 
 
