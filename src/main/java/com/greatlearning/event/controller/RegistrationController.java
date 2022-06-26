@@ -10,6 +10,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.mvc.support.RedirectAttributesModelMap;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -56,11 +57,16 @@ public class RegistrationController {
         return "list-students";
     }
     @RequestMapping(value="/delete")
-    @ResponseStatus(HttpStatus.NO_CONTENT)
-    public String deleteStudentById(@RequestParam("studentId") int theId){
+    //@ResponseStatus(HttpStatus.NO_CONTENT)
+    public ModelAndView deleteStudentById(@RequestParam("studentId") int theId){
         registrationService.deleteStudent(theId);
-        return ("redirect:/list");
+        Model theModel = new RedirectAttributesModelMap();
+        //List<Student> theStudents = registrationService.getRegisteredStudents();
+        //theModel.addAttribute("students",theStudents);
+       // return getAllRegisteredStudents(theModel);
+        return new ModelAndView("redirect:/list");
     }
+
 
 //    @RequestMapping(value="/updateForm")
 //    public String updateStudent(@PathVariable int id, Model m){
