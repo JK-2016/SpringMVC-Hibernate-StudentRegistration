@@ -31,9 +31,11 @@ public class RegistrationController {
     @RequestMapping(value="/registerStudent",method = RequestMethod.POST)
     public ModelAndView registerStudent(@ModelAttribute("student") Student theStudent){
         //write code to save  object
+
         System.out.println(theStudent.getId()+" "+theStudent.getName()+
                 " "+theStudent.getDepartment()+" " +theStudent.getCountry());
         registrationService.registerStudent(theStudent);
+        System.out.println("Student registered Successfully");
         //return new ModelAndView("empform","command",emp);
         return new ModelAndView("redirect:/list");
     }
@@ -53,6 +55,7 @@ public class RegistrationController {
     public String getAllRegisteredStudents(Model theModel){
         List<Student> theStudents = registrationService.getRegisteredStudents();
         theModel.addAttribute("students",theStudents);
+        System.out.println("All registered students: \n"+theStudents.toString());
         return "list-students";
     }
     @RequestMapping(value="/delete")
@@ -60,6 +63,7 @@ public class RegistrationController {
     public ModelAndView deleteStudentById(@RequestParam("studentId") int theId){
         registrationService.deleteStudent(theId);
         Model theModel = new RedirectAttributesModelMap();
+        System.out.println("The student with Id "+theId+" is deleted successfully");
         return new ModelAndView("redirect:/list");
     }
 
@@ -73,12 +77,15 @@ public class RegistrationController {
     @RequestMapping(value="/updateForm")
     public String updateStudent(@RequestParam("studentId") int theId, Model theModel) {
         Student theStudent = registrationService.getStudent(theId);
+        System.out.println("The details of student with id "+theId+" are updated from ");
+        System.out.println(theStudent.toString());
         theModel.addAttribute("command",theStudent);
         return "edit-student-form";
     }
     @RequestMapping(value="/update",method = RequestMethod.POST)
     public String editsave(@ModelAttribute("student") Student student){
         registrationService.updateStudentDetails(student.getId(),student);
+        System.out.println("to :"+student.toString());
         return ("redirect:/list");
     }
     @RequestMapping(value="/homePage")

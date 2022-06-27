@@ -10,8 +10,8 @@
       <form:form method = "POST" action = "update" >
          <table>
             <tr>
-                <td><form:label path = "id">Id</form:label></td>
-                <td><form:input path = "id" /></td>
+                <td><form:label path = "id">Id of Student to be updated</form:label></td>
+                <td><form:input readonly="true"  path = "id" /></td>
             </tr>
             <tr>
                <td><form:label path = "name">Name</form:label></td>
