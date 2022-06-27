@@ -1,6 +1,6 @@
 package com.greatlearning.event.controller;
 
-import com.greatlearning.event.model.Emp;
+
 import com.greatlearning.event.model.Student;
 import com.greatlearning.event.service.RegistrationService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,7 +12,6 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributesModelMap;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @Controller
@@ -31,7 +30,7 @@ public class RegistrationController {
     }
     @RequestMapping(value="/registerStudent",method = RequestMethod.POST)
     public ModelAndView registerStudent(@ModelAttribute("student") Student theStudent){
-        //write code to save emp object
+        //write code to save  object
         System.out.println(theStudent.getId()+" "+theStudent.getName()+
                 " "+theStudent.getDepartment()+" " +theStudent.getCountry());
         registrationService.registerStudent(theStudent);
@@ -61,9 +60,6 @@ public class RegistrationController {
     public ModelAndView deleteStudentById(@RequestParam("studentId") int theId){
         registrationService.deleteStudent(theId);
         Model theModel = new RedirectAttributesModelMap();
-        //List<Student> theStudents = registrationService.getRegisteredStudents();
-        //theModel.addAttribute("students",theStudents);
-       // return getAllRegisteredStudents(theModel);
         return new ModelAndView("redirect:/list");
     }
 
@@ -85,7 +81,10 @@ public class RegistrationController {
         registrationService.updateStudentDetails(student.getId(),student);
         return ("redirect:/list");
     }
-
+    @RequestMapping(value="/homePage")
+    public String showHomePage() {
+        return "index";
+    }
 
 //    @RequestMapping(value = "/registerStudent", method = RequestMethod.POST)
 //    /*@ResponseStatus(HttpStatus.CREATED)*/
@@ -96,30 +95,30 @@ public class RegistrationController {
 
 /*****************Emp Methods*****************/
 
-    @RequestMapping("/empform")
-    public ModelAndView showform(){
-        return new ModelAndView("empform","command",new Emp());
-    }
-    @RequestMapping(value="/save",method = RequestMethod.POST)
-    public ModelAndView save(@ModelAttribute("emp") Emp emp){
-        //write code to save emp object
-        System.out.println(emp.getName()+" "+emp.getSalary()+" "+emp.getDesignation());
-
-        //return new ModelAndView("empform","command",emp);
-        return new ModelAndView("redirect:/viewemp");
-    }
-
-    @RequestMapping("/viewemp")
-    public ModelAndView viewemp(){
-        //write the code to get all employees from DAO
-        //writing manual code for easy understanding
-        List<Emp> list=new ArrayList<Emp>();
-        list.add(new Emp(1,"rahul",35000f,"S.Engineer"));
-        list.add(new Emp(2,"aditya",25000f,"IT Manager"));
-        list.add(new Emp(3,"sachin",55000f,"Care Taker"));
-
-        return new ModelAndView("viewemp","list",list);
-    }
+//    @RequestMapping("/empform")
+//    public ModelAndView showform(){
+//        return new ModelAndView("empform","command",new Emp());
+//    }
+//    @RequestMapping(value="/save",method = RequestMethod.POST)
+//    public ModelAndView save(@ModelAttribute("emp") Emp emp){
+//        //write code to save emp object
+//        System.out.println(emp.getName()+" "+emp.getSalary()+" "+emp.getDesignation());
+//
+//        //return new ModelAndView("empform","command",emp);
+//        return new ModelAndView("redirect:/viewemp");
+//    }
+//
+//    @RequestMapping("/viewemp")
+//    public ModelAndView viewemp(){
+//        //write the code to get all employees from DAO
+//        //writing manual code for easy understanding
+//        List<Emp> list=new ArrayList<Emp>();
+//        list.add(new Emp(1,"rahul",35000f,"S.Engineer"));
+//        list.add(new Emp(2,"aditya",25000f,"IT Manager"));
+//        list.add(new Emp(3,"sachin",55000f,"Care Taker"));
+//
+//        return new ModelAndView("viewemp","list",list);
+//    }
 
 
 }
