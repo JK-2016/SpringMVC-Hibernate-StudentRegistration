@@ -55,7 +55,7 @@
          <!-- display the update link -->
           <a href="${updateLink}">Update</a>
          | <a href="${deleteLink}"
-         onclick="if (!(confirm('Are you sure you want to delete this customer?'))) return false">Delete</a>
+         onclick="if (!(confirm('Are you sure you want to delete this student?'))) return false">Delete</a>
         </td>
 
        </tr>
@@ -69,5 +69,8 @@
   </div>
 
  </div>
+ <br>
+   <c:url var="homepage" value="/homePage"></c:url>
+ <a href  = "${homepage}">Home Page</a>
 </body>
 </html>
