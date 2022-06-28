@@ -28,7 +28,7 @@ public class AppContext {
         sessionFactory.setPackagesToScan(new String[] {
                 "com.greatlearning.event"
         });
-        sessionFactory.setHibernateProperties(hibernateProperties());
+//        sessionFactory.setHibernateProperties(hibernateProperties());
         return sessionFactory;
     }
 
@@ -42,14 +42,14 @@ public class AppContext {
         return dataSource;
     }
 
-    private Properties hibernateProperties() {
-        Properties properties = new Properties();
-        properties.put("hibernate.dialect", environment.getRequiredProperty("hibernate.dialect"));
-        properties.put("hibernate.show_sql", environment.getRequiredProperty("hibernate.show_sql"));
-        properties.put("hibernate.format_sql", environment.getRequiredProperty("hibernate.format_sql"));
-        properties.put("hibernate.hbm2ddl.auto", environment.getRequiredProperty("hibernate.hbm2ddl.auto"));
-        return properties;
-    }
+//    private Properties hibernateProperties() {
+//        Properties properties = new Properties();
+//        properties.put("hibernate.dialect", environment.getRequiredProperty("hibernate.dialect"));
+//        properties.put("hibernate.show_sql", environment.getRequiredProperty("hibernate.show_sql"));
+//        properties.put("hibernate.format_sql", environment.getRequiredProperty("hibernate.format_sql"));
+//        properties.put("hibernate.hbm2ddl.auto", environment.getRequiredProperty("hibernate.hbm2ddl.auto"));
+//        return properties;
+//    }
 
     @Bean
     public HibernateTransactionManager getTransactionManager() {
